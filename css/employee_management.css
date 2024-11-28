@@ -1,0 +1,239 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Top header */
+.top-header {
+    background-color: #0c3c88;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.top-header span {
+    font-size: 16px;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+}
+
+.phone-icon {
+    margin-right: 5px;
+}
+
+.appointment-btn {
+    background-color: #ffc107;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin-left: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Main header */
+.main-header {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    width: 150px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    padding: 10px 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #0c3c88;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #0c3c88;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.dropdown-menu li a {
+    color: white;
+    padding: 10px 20px;
+    display: block;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #0056b3;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Hero Section */
+.hero {
+    background: url('hero-bg.jpg') no-repeat center center/cover;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero h1 {
+    color: white;
+    font-size: 48px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.notification {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    display: none; /* Ẩn mặc định */
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    display: flex; /* Sử dụng Flexbox */
+    justify-content: space-between; /* Tạo khoảng cách đều giữa label và input */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-bottom: 15px; /* Khoảng cách giữa các nhóm */
+}
+
+label {
+    margin-right: 10px; /* Khoảng cách giữa label và input */
+    flex: 0 0 120px; /* Chiều rộng tối thiểu cho label */
+    font-weight: bold;
+    text-align: right; /* Căn chỉnh chữ bên phải cho label */
+    display: flex; /* Sử dụng Flexbox */
+    justify-content: space-between; /* Tạo khoảng cách đều giữa label và input */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-bottom: 15px; 
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="number"],
+select {
+    flex: 1; /* Cho phép input chiếm toàn bộ không gian còn lại */
+    max-width: 200px; /* Giới hạn chiều rộng tối đa của các trường input */
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+}
+
+th {
+    background-color: #939faa;
+    color: #000000;
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* Màu nền khi di chuột qua hàng */
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: 1px solid #007bff;
+    color: #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #e9ecef;
+}

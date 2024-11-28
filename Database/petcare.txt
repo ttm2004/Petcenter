@@ -1,0 +1,92 @@
+// Tạo bang khách hàng 
+
+CREATE TABLE KhachHang (
+    MaKH INT PRIMARY KEY AUTO_INCREMENT,  -- Mã khách hàng
+    HoTen NVARCHAR(255) NOT NULL,  -- Họ và tên khách hàng
+    SoDienThoai VARCHAR(15),  -- Số điện thoại
+    Email VARCHAR(255),  -- Địa chỉ email
+    DiaChi NVARCHAR(255),  -- Địa chỉ
+    MaThuCung INT,  -- Mã thú cưng, khóa ngoại từ bảng ThuCung
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+// Tạo bang thú cưng
+
+CREATE TABLE ThuCung (
+    MaThuCung INT PRIMARY KEY AUTO_INCREMENT,
+    TenThuCung VARCHAR(255) NOT NULL,  -- Tên của thú cưng
+    LoaiThuCung ENUM(
+        'Chó',
+        'Mèo'
+    ) DEFAULT 'Chó',  -- Giá trị mặc định cho loại thú cưng
+    MaKH INT,  -- Mã khách hàng, khóa ngoại từ bảng KhachHang
+    DichVuChon ENUM(
+        'Khám sức khỏe tổng quát định kỳ',
+        'Xét nghiệm thú cưng',
+        'Chăm sóc thú cưng',
+        'Tiêm ngừa vắc xin',
+        'Phẫu thuật (thai sản, triệt sản, mắt, tai,...)',
+        'Xuất cảnh',
+        'Khám bệnh & điều trị'
+    ) DEFAULT 'Khám sức khỏe tổng quát định kỳ',  -- Giá trị mặc định cho dịch vụ
+    TrangThaiChuaBenh ENUM(
+        'Đã chăm sóc',
+        'Đang chăm sóc'
+    ) DEFAULT 'Đang chăm sóc',  -- Giá trị mặc định cho trạng thái chăm sóc
+    ThoiGianNhan DATE NOT NULL,  -- Thời gian nhận thú cưng
+    ThoiGianTra DATE,  -- Thời gian trả thú cưng, có thể để trống nếu chưa trả
+    TrangThaiTra ENUM('Đã trả', 'Chưa trả') DEFAULT 'Chưa trả',  -- Trạng thái đã trả hay chưa
+    HinhAnh VARCHAR(255),  -- Đường dẫn đến file ảnh của thú cưng
+    GhiChu TEXT  -- Ghi chú đặc điểm thú cưng
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+// Thêm khóa ngoại cho bang thú cưng
+
+ALTER TABLE ThuCung
+ADD CONSTRAINT FK_MaKH FOREIGN KEY (MaKH) REFERENCES KhachHang(MaKH);
+
+// Thêm khóa ngoại cho bang khách hàng
+
+ADD CONSTRAINT FOREIGN KEY (MaThuCung) REFERENCES ThuCung(MaThuCung);
+
+
+// chèn dữ lieu vào bang khách hàng 
+
+INSERT INTO KhachHang (HoTen, SoDienThoai, Email, DiaChi) VALUES
+('Nguyễn Văn A', '0901234567', 'nguyenvana@example.com', '123 Đường A, Quận 1, TP.HCM'),
+('Trần Thị B', '0912345678', 'tranthib@example.com', '456 Đường B, Quận 2, TP.HCM'),
+('Lê Văn C', '0923456789', 'levanc@example.com', '789 Đường C, Quận 3, TP.HCM'),
+('Phạm Thị D', '0934567890', 'phamthid@example.com', '321 Đường D, Quận 4, TP.HCM');
+
+// Chèn dữ lieu vào bang thú cưng
+
+INSERT INTO ThuCung (TenThuCung, LoaiThuCung, MaKH, DichVuChon, TrangThaiChuaBenh, ThoiGianNhan, ThoiGianTra, TrangThaiTra, HinhAnh, GhiChu) VALUES
+('Milo', 'Chó', 1, 'Khám sức khỏe tổng quát định kỳ', 'Đang chăm sóc', '2024-10-01', NULL, 'Chưa trả', 'path/to/image1.jpg', 'Chó rất ngoan'),
+('Kitty', 'Mèo', 2, 'Tiêm ngừa vắc xin', 'Đã chăm sóc', '2024-10-02', '2024-10-05', 'Đã trả', 'path/to/image2.jpg', 'Mèo rất đáng yêu'),
+('Max', 'Chó', 3, 'Phẫu thuật triệt sản', 'Đang chăm sóc', '2024-10-03', NULL, 'Chưa trả', 'path/to/image3.jpg', 'Chó này cần chăm sóc đặc biệt'),
+('Luna', 'Mèo', 4, 'Khám bệnh & điều trị', 'Đã chăm sóc', '2024-10-04', '2024-10-07', 'Đã trả', 'path/to/image4.jpg', 'Mèo bị cảm lạnh');
+
+
+
+
+CREATE TABLE sanpham (
+  MaSP INT PRIMARY KEY AUTO_INCREMENT,
+  TenSP VARCHAR(255),
+  MaLoai INT,
+  HinhAnh VARCHAR(255),
+  SoLuong INT,
+  Gia DECIMAL(10, 2),
+  MoTa VARCHAR(Max),
+);
+
+
+INSERT INTO sanpham ( TenSanPham,HinhAnh, SoLuong, tinh_trang, gia_tien, danh_muc)
+VALUES
+('103', 'Chuồng cho chó', '', 50, 'Còn hàng', 1200000, 'Phụ kiện'),
+('103', 'Chuồng cho chó', '', 50, 'Còn hàng', 1200000, 'Phụ kiện'),
+('101', 'Thức ăn cho chó', '', 150, 'Còn hàng', 300000, 'Thức ăn'),
+('101', 'Thức ăn cho chó', '', 150, 'Còn hàng', 300000, 'Thức ăn'),
+('102', 'Thức ăn cho mèo', '', 100, 'Còn hàng', 350000, 'Thức ăn'),
+('102', 'Thức ăn cho mèo', '', 100, 'Còn hàng', 350000, 'Thức ăn'),
+('104', 'Đồ chơi cho mèo', '', 80, 'Còn hàng', 150000, 'Đồ chơi'),
+('104', 'Đồ chơi cho mèo', '', 80, 'Còn hàng', 150000, 'Đồ chơi');
+

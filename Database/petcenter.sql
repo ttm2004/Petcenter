@@ -1,0 +1,100 @@
+-- 1. Bảng KhachHang
+CREATE TABLE KhachHang (
+    MaKH INT PRIMARY KEY,
+    HoTenKH VARCHAR(100) NOT NULL,
+    SoDienThoai VARCHAR(15) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    DiaChi VARCHAR(255) DEFAULT NULL,
+    NgaySinh DATE DEFAULT NULL,
+    GioiTinh ENUM('Nam','Nữ','Khác') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 2. Bảng DichVu
+CREATE TABLE DichVu (
+    MaDV INT PRIMARY KEY,
+    TenDichVu VARCHAR(100) NOT NULL,
+    MoTa TEXT DEFAULT NULL,
+    Gia DECIMAL(10,2) NOT NULL,
+    ThoiGianThucHien INT DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 3. Bảng LoaiSanPham
+CREATE TABLE LoaiSanPham (
+    MaLoai INT PRIMARY KEY,
+    TenLoai VARCHAR(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 4. Bảng NhanVien
+CREATE TABLE NhanVien (
+    MaNV INT PRIMARY KEY,
+    AnhThe VARCHAR(255) DEFAULT NULL,
+    HoTenNV VARCHAR(100) NOT NULL,
+    Username VARCHAR(50) NOT NULL,
+    MatKhau VARCHAR(255) NOT NULL,
+    VaiTro ENUM('LeTan','ChamsocThuCung','QuanLy','Admin') NOT NULL,
+    NgaySinh DATE DEFAULT NULL,
+    GioiTinh ENUM('Nam','Nữ','Khác') NOT NULL,
+    SoCMND VARCHAR(12) DEFAULT NULL,
+    NoiCapCMND VARCHAR(255) DEFAULT NULL,
+    NgayCapCMND DATE DEFAULT NULL,
+    DiaChi VARCHAR(255) DEFAULT NULL,
+    SoDienThoai VARCHAR(15) DEFAULT NULL,
+    Email VARCHAR(100) DEFAULT NULL,
+    NgayVaoLam DATE DEFAULT NULL,
+    TrangThai ENUM('Hoạt Động','Không Hoạt Động') DEFAULT 'Hoạt Động',
+    NgayTao DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 5. Bảng Users
+CREATE TABLE Users (
+    MaUser INT PRIMARY KEY,
+    Username VARCHAR(50) NOT NULL,
+    MatKhau VARCHAR(255) NOT NULL,
+    Role ENUM('Admin','QuanLy','NhanVien') NOT NULL,
+    MaNV INT,
+    FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 6. Bảng SanPham
+CREATE TABLE SanPham (
+    MaSP INT PRIMARY KEY,
+    TenSP VARCHAR(255) DEFAULT NULL,
+    MaLoai INT,
+    HinhAnh VARCHAR(255) DEFAULT NULL,
+    SoLuong INT DEFAULT NULL,
+    Gia DECIMAL(10,2) DEFAULT NULL,
+    MoTa VARCHAR(1000) DEFAULT NULL,
+    FOREIGN KEY (MaLoai) REFERENCES LoaiSanPham(MaLoai) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 7. Bảng ThuCung
+CREATE TABLE ThuCung (
+    MaThuCung INT PRIMARY KEY,
+    TenThuCung VARCHAR(100) NOT NULL,
+    LoaiThuCung VARCHAR(50) NOT NULL,
+    MaKH INT,
+    ViTri VARCHAR(100),
+    TinhTrang VARCHAR(50),
+    MauSac VARCHAR(50),
+    CanNang DECIMAL(5, 2),
+    HinhAnh VARCHAR(255),
+    NgayTiepNhan DATE,
+    GhiChu TEXT,
+    MaDonChamSoc VARCHAR(20),
+    FOREIGN KEY (MaKH) REFERENCES KhachHang(MaKH) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 8. Bảng DonChamSoc
+CREATE TABLE DonChamSoc (
+    MaDonChamSoc VARCHAR(20) PRIMARY KEY,
+    MaThuCung INT,
+    NgayBatDau DATE NOT NULL,
+    NgayKetThuc DATE,
+    DichVu VARCHAR(100) NOT NULL,
+    TinhTrangDon VARCHAR(50),
+    ChiPhi DECIMAL(10, 2),
+    GhiChu TEXT,
+    FOREIGN KEY (MaThuCung) REFERENCES ThuCung(MaThuCung) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+

@@ -1,0 +1,18 @@
+{
+    "name": "trant/pet_care",
+    "description": "Pet care management system",
+    "require": {
+        "endroid/qr-code": "^4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Trant\\PetCare\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ttm2004",
+            "email": "manhtrong2k4@gmail.com"
+        }
+    ]
+}
